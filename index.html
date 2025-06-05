@@ -1,1 +1,45 @@
-Hello world!
+<!DOCTYPE HTML>
+    <html>
+    <head>
+        <title>test</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+        </style>
+    </head>
+    <body>
+        <div class="lightbox" id="loginlightbox">
+            <h1>login</h1>
+            <form class="authform" id="loginform">
+                <p>email</p>
+                <input id="email" type="text">
+                <p>password</p>
+                <input id="pass" type="password">
+                <br><br>
+                <button class="formButton" id="loginEmail" type="submit"><b>login</b></button>
+                <br><br>
+                <p class="linebreak"> or </p>
+                <button class="formButton" id="loginGoogle"><img src="Google__G__logo.svg">&emsp;<b>login with google</b></button>
+            </form>
+        </div>
+        <div class="lightbox" id="registerlightbox">
+            <h1>register</h1>
+            <form class="authform" id="registerform">
+                <p>email</p>
+                <input id="email" type="text">
+                <p>username</p>
+                <input id="username" type="text">
+                <p>password</p>
+                <input id="pass" type="password">
+                <p>age</p>
+                <input id="age" type="text">
+                <br><br>
+                <button class="formButton" id="registerEmail" type="submit"><b>register</b></button>
+                <br><br>
+                <p class="linebreak"> or </p>
+                <button class="formButton" id="registerGoogle"><img src="Google__G__logo.svg">&emsp;<b>register with google</b></button>
+            </form>
+        </div>
+    </body>
+</html>

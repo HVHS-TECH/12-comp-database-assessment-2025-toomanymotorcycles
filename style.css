@@ -1,0 +1,47 @@
+body {
+    font-family: "Raleway", Arial, Helvetica, sans-serif;
+}
+
+.lightbox {
+  color: white;
+  text-align: center;
+  max-width: 600px;
+  margin: auto;
+  background-color: #2c2c2c;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 255);
+}
+
+.authform > :not(.formButton, .linebreak) {
+  text-align: left;
+}
+
+.authform > input {
+  font-family: "Raleway", Arial, Helvetica, sans-serif;
+  font-size: medium;
+  width: 100%;
+}
+
+.formButton {
+  transition-duration: 0.25s;
+  font-family: "Raleway", Arial, Helvetica, sans-serif;
+  font-size: large;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 255);
+  color: white;
+  background-color: #2c2c2c;
+  border: 0px;
+}
+
+.formButton:hover {
+  transition-duration: 0.25s;
+  font-size: x-large;
+}
+
+.linebreak:before, .linebreak:after {
+    content: "";
+    flex: 1;
+    border-bottom: 2px solid #ffffff;
+    margin: auto;
+}
