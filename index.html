@@ -3,43 +3,66 @@
     <head>
         <title>test</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="./style.css">
+        <script type="module">
+        </script>
+        <script type="module" src="./scripts/ui.mjs"></script>
+        <script type="module" src="./scripts/init.mjs"></script>
+        <script type="module" src="./scripts/auth.mjs"></script>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
         </style>
     </head>
     <body>
+        <div id="titleBox">
+           <h1 id="mainTitle">the generic game hub</h1>
+           <hr style="border: solid 3px;">
+           <br><br>
+           <h1>a bunch of games for your enjoyment</h1>
+           <button class="largeFormButton" onclick="openLightbox('registerlightbox')"><b>register</b></button> | <button class="largeFormButton" onclick="openLightbox('loginlightbox')"><b>login</b></button>
+           <h1>or</h1>
+           <button class="largeFormButton" onclick="openLightbox('googlelightbox'); fb_login(true)"><img src="Google__G__logo.svg">&emsp;<b>login with google</b></button>
+        </div>
+        <div class="lightboxBack" id="authLightboxes">
         <div class="lightbox" id="loginlightbox">
             <h1>login</h1>
             <form class="authform" id="loginform">
                 <p>email</p>
-                <input id="email" type="text">
+                <input id="email1" type="text">
                 <p>password</p>
-                <input id="pass" type="password">
+                <input id="pass1" type="password">
                 <br><br>
                 <button class="formButton" id="loginEmail" type="submit"><b>login</b></button>
                 <br><br>
                 <p class="linebreak"> or </p>
-                <button class="formButton" id="loginGoogle"><img src="Google__G__logo.svg">&emsp;<b>login with google</b></button>
+                <button type="button" class="formButton" id="loginGoogle" onclick="openLightbox('googlelightbox'); fb_login(true)"><img src="Google__G__logo.svg">&emsp;<b>login with google</b></button>
             </form>
         </div>
         <div class="lightbox" id="registerlightbox">
             <h1>register</h1>
             <form class="authform" id="registerform">
                 <p>email</p>
-                <input id="email" type="text">
+                <input id="email2" type="text">
                 <p>username</p>
                 <input id="username" type="text">
                 <p>password</p>
-                <input id="pass" type="password">
+                <input id="pass2" type="password">
                 <p>age</p>
                 <input id="age" type="text">
                 <br><br>
                 <button class="formButton" id="registerEmail" type="submit"><b>register</b></button>
                 <br><br>
                 <p class="linebreak"> or </p>
-                <button class="formButton" id="registerGoogle"><img src="Google__G__logo.svg">&emsp;<b>register with google</b></button>
+                <button type="button" class="formButton" id="registerGoogle" onclick="openLightbox('googlelightbox'); fb_login(true)"><img src="Google__G__logo.svg">&emsp;<b>register with google</b></button>
             </form>
         </div>
+        <div class="lightbox" id="googlelightbox">
+            <h1>google authentication</h1>
+            <p>logging you in via google...</p>
+        </div>
+        </div>
     </body>
+    <script>
+        
+    </script>
 </html>

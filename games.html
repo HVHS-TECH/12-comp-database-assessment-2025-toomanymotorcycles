@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+    <html>
+    <head>
+        <title>test</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="./style.css">
+        <script type="module" src="./scripts/ui.mjs"></script>
+        <script type="module" src="./scripts/init.mjs"></script>
+        <script type="module" src="./scripts/auth.mjs"></script>
+        <script type="module" src="./scripts/highscore.mjs"></script>
+        <script type="module">
+            import {fb_authCheck_then } from "./scripts/auth.mjs";
+            fb_authCheck_then(() => {
+                if (window.user == undefined) {
+                    window.location = "./index.html"
+                }
+                console.log("auth:")
+                document.getElementById("email").innerHTML = window.user.email;
+                document.getElementById("uid").innerHTML = "UID:"+window.user.uid;
+                document.getElementById("profilePic").setAttribute("src",window.user.photoURL);
+                document.getElementById("awaitingAuth").setAttribute("hidden","");
+                document.getElementById("authRequired").removeAttribute("hidden");
+            }, true);
+        </script>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+        </style>
+    </head>
+    <body>
+        <div id="authRequired" hidden>
+        <div class="sidebar" id="loginlightbox">
+            <h1 id="username">{username}</h1>
+            <p id="email">{email}</p>
+            <p id="uid">UID: {uid}</p>
+            <br>
+            <img id="profilePic" src="./placeholder.png">
+            <br>
+            <br>
+            <p>button</p>
+        </div>
+        <div class="mainArea" id="games">
+            <h1>Games</h1>
+        </div>
+        </div>
+        <div id="awaitingAuth" style="text-align:center; color:white">
+            <br>
+            <p>confirming authorisation...</p>
+        </div>
+    </body>
+    <script>
+        
+    </script>
+</html>
