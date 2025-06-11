@@ -35,7 +35,7 @@
                 <button class="formButton" id="loginEmail" type="submit"><b>login</b></button>
                 <br><br>
                 <p class="linebreak"> or </p>
-                <button type="button" class="formButton" id="loginGoogle" onclick="openLightbox('googlelightbox'); fb_login(true)"><img src="Google__G__logo.svg">&emsp;<b>login with google</b></button>
+                <button type="button" class="formButton" id="loginGoogle" onclick="closeLightboxes(); openLightbox('googlelightbox'); fb_login(true)"><img src="Google__G__logo.svg">&emsp;<b>login with google</b></button>
             </form>
         </div>
         <div class="lightbox" id="registerlightbox">
@@ -53,10 +53,11 @@
                 <button class="formButton" id="registerEmail" type="submit"><b>register</b></button>
                 <br><br>
                 <p class="linebreak"> or </p>
-                <button type="button" class="formButton" id="registerGoogle" onclick="openLightbox('googlelightbox'); fb_login(true)"><img src="Google__G__logo.svg">&emsp;<b>register with google</b></button>
+                <button type="button" class="formButton" id="registerGoogle" onclick="closeLightboxes(); openLightbox('googlelightbox'); fb_login(true)"><img src="Google__G__logo.svg">&emsp;<b>register with google</b></button>
             </form>
         </div>
         <div class="lightbox" id="googlelightbox">
+            <img src="./load-32_128.gif">
             <h1>google authentication</h1>
             <p>logging you in via google...</p>
         </div>

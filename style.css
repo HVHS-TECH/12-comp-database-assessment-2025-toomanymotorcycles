@@ -36,11 +36,77 @@ body {
   width: 20%;
   height: 100%;
   margin: auto;
-  background-color: #2c2c2c;
-  padding: 2rem;
-  border-radius: 12px;
+  background-color: #242424;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+.sidebar > button {
+  transition-duration: 0.25s;
+  width: 100%;
+  background-color: #242424;
+  text-align: left;
+  color: white;
+  font-family: "Raleway", Arial, Helvetica, sans-serif;
+  border: 0px;
+  font-size: x-large;
+  padding-left: 2rem;
+}
+
+.sidebar > button.active {
+  transition-duration: 0.25s;
+  width: 100%;
+  background-color: #1b1b1b;
+  text-align: left;
+  color: white;
+  font-family: "Raleway", Arial, Helvetica, sans-serif;
+  border: 0px;
+  font-size: x-large;
+}
+
+.sidebar > button:hover {
+  transition-duration: 0.25s;
+  background-color: #1b1b1b;
+  cursor: pointer;
+}
+
+.sidebar > button#logoutbutton:hover {
+  transition-duration: 0.25s;
+  background-color: #1b1b1b;
+  color: lightcoral;
+}
+
+.sidebar > button#stupidbutton {
+  top: 0%;
+}
+.sidebar > button#stupidbutton:hover {
+  transition-duration: 0.25s;
+  background-color: #242424;
+}
+
+#logoutLightbox > button {
+  transition-duration: 0.25s;
+  background-color: #242424;
+  text-align: center;
+  color: white;
+  font-family: "Raleway", Arial, Helvetica, sans-serif;
+  border: 0px;
+  border-radius: 5px;
+  padding: 1rem;
+  font-size: x-large;
+  cursor: pointer;
+}
+
+#logoutLightbox > button:hover {
+  transition-duration: 0.25s;
+  background-color: #1b1b1b;
+}
+
+#logoutLightbox > button#logout:hover {
+  transition-duration: 0.25s;
+  background-color: #1b1b1b;
+  color: lightcoral;
+}
+
 .mainArea {
   display: flexbox;
   float: left;
@@ -87,6 +153,7 @@ body {
 .formButton:hover {
   transition-duration: 0.25s;
   font-size: x-large;
+  cursor: pointer;
 }
 
 .largeFormButton {
@@ -101,6 +168,7 @@ body {
 .largeFormButton:hover {
   transition-duration: 0.25s;
   font-size: xx-large;
+  cursor: pointer;
 }
 
 .linebreak:before, .linebreak:after {

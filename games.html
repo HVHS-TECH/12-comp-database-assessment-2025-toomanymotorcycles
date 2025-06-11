@@ -16,7 +16,7 @@
                 }
                 console.log("auth:")
                 document.getElementById("email").innerHTML = window.user.email;
-                document.getElementById("uid").innerHTML = "UID:"+window.user.uid;
+                document.getElementById("uid").innerHTML = "UID: "+window.user.uid;
                 document.getElementById("profilePic").setAttribute("src",window.user.photoURL);
                 document.getElementById("awaitingAuth").setAttribute("hidden","");
                 document.getElementById("authRequired").removeAttribute("hidden");
@@ -29,14 +29,18 @@
     <body>
         <div id="authRequired" hidden>
         <div class="sidebar" id="loginlightbox">
-            <h1 id="username">{username}</h1>
-            <p id="email">{email}</p>
-            <p id="uid">UID: {uid}</p>
+            <h1 id="username" style="padding-left: 2rem; padding-top: 2rem;">{username}</h1>
+            <p id="email" style="line-height: 0px; padding-left: 2rem;">{email}</p>
+            <p id="uid" style="color: gray; line-height: 5px; padding-left: 2rem;">UID: {uid}</p>
             <br>
-            <img id="profilePic" src="./placeholder.png">
+            <img id="profilePic" style="padding-left: 2rem;" src="./placeholder.png">
             <br>
             <br>
-            <p>button</p>
+            <button class="active" id="homebutton">home</button>
+            <button id="profilebutton">profile</button>
+            <button id="recordsbutton">records</button>
+            <button id="logoutbutton" onclick="openLightbox('logoutLightbox')">log out</button>
+            <button id="stupidbutton" onclick="window.location='https://www.youtube.com/watch?v=dQw4w9WgXcQ'"></button>
         </div>
         <div class="mainArea" id="games">
             <h1>Games</h1>
@@ -44,7 +48,14 @@
         </div>
         <div id="awaitingAuth" style="text-align:center; color:white">
             <br>
+            <img src="./load-32_128.gif">
             <p>confirming authorisation...</p>
+        </div>
+        <div class="lightboxBack" id="authLightboxes">
+            <div class="lightbox" id="logoutLightbox">
+                <h1>are you sure you want to log out?</h1>
+                <button id="cancel" onclick="closeLightboxes()">cancel</button>&emsp;&emsp;<button id="logout" onclick="fb_logout()">logout</button>
+            </div>
         </div>
     </body>
     <script>
