@@ -39,9 +39,9 @@
             <img id="profilePic" style="padding-left: 2rem;" src="./placeholder.png">
             <br>
             <br>
-            <button class="active" id="homebutton">home</button>
-            <button id="profilebutton">profile</button>
-            <button id="recordsbutton">records</button>
+            <button class="active" id="homebutton" onclick="document.getElementById('games').removeAttribute('hidden'); document.getElementById('profile').setAttribute('hidden',''); document.getElementById('records').setAttribute('hidden',''); document.getElementById('homebutton').className = 'active'; document.getElementById('profilebutton').className = ''; document.getElementById('recordsbutton').className = '';">home</button>
+            <button id="profilebutton" onclick="document.getElementById('profile').removeAttribute('hidden'); document.getElementById('games').setAttribute('hidden',''); document.getElementById('records').setAttribute('hidden',''); document.getElementById('profilebutton').className = 'active'; document.getElementById('homebutton').className = ''; document.getElementById('recordsbutton').className = '';">profile</button>
+            <button id="recordsbutton" onclick="document.getElementById('records').removeAttribute('hidden'); document.getElementById('profile').setAttribute('hidden',''); document.getElementById('games').setAttribute('hidden',''); document.getElementById('recordsbutton').className = 'active'; document.getElementById('profilebutton').className = ''; document.getElementById('homebutton').className = '';">records</button>
             <button id="logoutbutton" onclick="openLightbox('logoutLightbox')">log out</button>
             <button id="stupidbutton" onclick="window.location='https://www.youtube.com/watch?v=dQw4w9WgXcQ'"></button>
         </div>
@@ -51,29 +51,41 @@
                 
             </div>
         </div>
+        <div class="mainArea" id="profile" hidden>
+            <h1>Profile</h1>
+            
+        </div>
+        <div class="mainArea" id="records" hidden>
+            <h1>Records</h1>
+            
+        </div>
         </div>
         <div id="awaitingAuth" style="text-align:center; color:white">
             <br>
             <img src="./load-32_128.gif">
             <p>confirming authorisation...</p>
         </div>
-        <div class="lightboxBack" id="authLightboxes">
+        <div class="lightboxBack" id="authLightboxes" style="z-index: 100000;">
             <div class="lightbox" id="logoutLightbox">
                 <h1>are you sure you want to log out?</h1>
                 <button id="cancel" onclick="closeLightboxes()">cancel</button>&emsp;&emsp;<button id="logout" onclick="fb_logout()">logout</button>
             </div>
             <div class="lightbox" id="gameLightbox">
-                <h1 id="gameTitle">{game title}</h1><br>
                 <img id="gameImg" src="placeholder.png"><br>
-                <p id="gameDesc">{game description}</p>
-                <button id="logout" onclick="">play</button>
+                <div>
+                    <h1 id="gameTitle">{game title}</h1><br>
+                    <p id="gameDesc">{game description}</p>
+                    <button id="playButton" onclick="">play</button>
+                </div>
             </div>
         </div>
         <div id="templateStorage" hidden>
-            <button id="entryTemplate" class="gameEntry">
+            <button id="entryTemplate" class="gameEntry" onclick="openGameLightbox()">
                 <div>
                     <img src="placeholder.png"><br>
-                    <h1>{game title}</h1>
+                    <div>
+                        <h1>{game title}</h1>
+                    </div>
                 </div>
             </button>
         </div>
