@@ -15,6 +15,7 @@ console.log('%c fb_readwrite.mjs initialised',
 /**************************************************************/
 // Import all external constants & functions required
 import { ref, query, orderByChild, limitToFirst, limitToLast, get, set, update, onValue, remove} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+import { database } from "./init.mjs"
 /**************************************************************/
 // Import all the methods you want to call from the firebase modules
 
@@ -45,7 +46,7 @@ function fb_read(path) {
     } else {
         console.log("Attempting to read value as anonymous user");
     }
-    const reference = ref(FB_DATABASE, path);
+    const reference = ref(database, path);
     get(reference).then((snapshot) => {
         var fb_data = snapshot.val();
         if (fb_data != null) {
@@ -76,7 +77,7 @@ function fb_read_passOn(path,nextFunction) {
     } else {
         console.log("Attempting to read value as anonymous user");
     }
-    const reference = ref(FB_DATABASE, path);
+    const reference = ref(database, path);
     get(reference).then((snapshot) => {
         var fb_data = snapshot.val();
         if (fb_data != null) {
@@ -113,7 +114,7 @@ function fb_readpath(path) {
     } else {
         console.log("Attempting to read path as anonymous user");
     }
-    const reference = ref(FB_DATABASE, path);
+    const reference = ref(database, path);
     get(reference).then((snapshot) => {
         var fb_data = snapshot.val();
         if (fb_data != null) {
@@ -148,7 +149,7 @@ function fb_write(path, value) {
     } else {
         console.log("Attempting to write value as anonymous user");
     }
-    const reference = ref(FB_DATABASE, path);
+    const reference = ref(database, path);
     set(reference, value).then(() => {
         console.log("Write successful.")
         //document.getElementById("p_fbWriteRec").innerHTML = "Success.";
@@ -178,7 +179,7 @@ function fb_update(path, value) {
     } else {
         console.log("Attempting to update value as anonymous user");
     }
-    const reference = ref(FB_DATABASE, path);
+    const reference = ref(database, path);
     update(reference, value).then(() => {
         console.log("Update successful.")
         //document.getElementById("p_fbUpdateRec").innerHTML = "Success.";
@@ -214,8 +215,8 @@ function fb_sortedread(path, orderKey, limit, orderDescending) {
     }
 
     var reference;
-    if (orderDescending) { reference = query(ref(FB_DATABASE, path), orderByChild(orderKey), limitToLast(limit));} 
-    else {reference = query(ref(FB_DATABASE, path), orderByChild(orderKey), limitToFirst(limit));}
+    if (orderDescending) { reference = query(ref(database, path), orderByChild(orderKey), limitToLast(limit));} 
+    else {reference = query(ref(database, path), orderByChild(orderKey), limitToFirst(limit));}
 
     get(reference).then((allSnapshots) => {
         if (allSnapshots != null) {
@@ -255,7 +256,7 @@ function fb_listen(path) {
     } else {
         console.log("Attempting to set up listener on value as anonymous user");
     }
-    const reference = ref(FB_DATABASE, path);
+    const reference = ref(database, path);
     onValue(reference, (snapshot) => {
         console.log("LISTENER ACTIVATED")
         var fb_data = snapshot.val();
@@ -284,7 +285,7 @@ function fb_delete(path) {
     } else {
         console.log("Attempting to delete value as anonymous user");
     }
-    const reference = ref(FB_DATABASE, path);
+    const reference = ref(database, path);
     remove(reference).then(() => {
         console.log("Removal successful.")
         //document.getElementById("p_deleteRec").innerHTML = "Success.";

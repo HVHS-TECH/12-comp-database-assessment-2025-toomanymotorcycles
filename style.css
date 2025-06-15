@@ -107,6 +107,32 @@ body {
   color: lightcoral;
 }
 
+.gameEntry {
+  transition-duration: 0.25s;
+  background-color: #242424;
+  text-align: center;
+  color: white;
+  font-family: "Raleway", Arial, Helvetica, sans-serif;
+  border: 0px;
+  height: 100%;
+  border-radius: 5px;
+  font-size: x-large;
+  cursor: pointer;
+}
+
+.gameEntry:hover {
+  transition-duration: 0.25s;
+  background-color: #1b1b1b;
+}
+
+.gameEntry > div {
+  padding: 0%;
+}
+
+.gameEntry > div > img {
+  width: 100%;
+}
+
 .mainArea {
   display: flexbox;
   float: left;

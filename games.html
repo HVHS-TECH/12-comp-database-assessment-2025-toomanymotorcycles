@@ -8,8 +8,10 @@
         <script type="module" src="./scripts/init.mjs"></script>
         <script type="module" src="./scripts/auth.mjs"></script>
         <script type="module" src="./scripts/highscore.mjs"></script>
+        <script type="module" src="./scripts/gamelist.mjs"></script>
         <script type="module">
             import {fb_authCheck_then } from "./scripts/auth.mjs";
+            import { loadGames } from "./scripts/gamelist.mjs";
             fb_authCheck_then(() => {
                 if (window.user == undefined) {
                     window.location = "./index.html"
@@ -20,6 +22,7 @@
                 document.getElementById("profilePic").setAttribute("src",window.user.photoURL);
                 document.getElementById("awaitingAuth").setAttribute("hidden","");
                 document.getElementById("authRequired").removeAttribute("hidden");
+                loadGames();
             }, true);
         </script>
         <style>
@@ -44,6 +47,9 @@
         </div>
         <div class="mainArea" id="games">
             <h1>Games</h1>
+            <div id="gameList">
+                
+            </div>
         </div>
         </div>
         <div id="awaitingAuth" style="text-align:center; color:white">
@@ -56,6 +62,20 @@
                 <h1>are you sure you want to log out?</h1>
                 <button id="cancel" onclick="closeLightboxes()">cancel</button>&emsp;&emsp;<button id="logout" onclick="fb_logout()">logout</button>
             </div>
+            <div class="lightbox" id="gameLightbox">
+                <h1 id="gameTitle">{game title}</h1><br>
+                <img id="gameImg" src="placeholder.png"><br>
+                <p id="gameDesc">{game description}</p>
+                <button id="logout" onclick="">play</button>
+            </div>
+        </div>
+        <div id="templateStorage" hidden>
+            <button id="entryTemplate" class="gameEntry">
+                <div>
+                    <img src="placeholder.png"><br>
+                    <h1>{game title}</h1>
+                </div>
+            </button>
         </div>
     </body>
     <script>
