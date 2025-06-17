@@ -40,6 +40,10 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.sidebar img {
+  border-radius: 100px;
+}
+
 .sidebar > button {
   transition-duration: 0.25s;
   width: 100%;
@@ -101,6 +105,24 @@ body {
   background-color: #1b1b1b;
 }
 
+#gameLightbox > div > button {
+  transition-duration: 0.25s;
+  background-color: #242424;
+  text-align: center;
+  color: white;
+  font-family: "Raleway", Arial, Helvetica, sans-serif;
+  border: 0px;
+  border-radius: 5px;
+  padding: 1rem;
+  font-size: x-large;
+  cursor: pointer;
+}
+
+#gameLightbox > div > button:hover {
+  transition-duration: 0.25s;
+  background-color: #1b1b1b;
+}
+
 #logoutLightbox > button#logout:hover {
   transition-duration: 0.25s;
   background-color: #1b1b1b;
@@ -146,6 +168,16 @@ body {
 .gameEntry > div > img {
   position: relative;
   height: 100%;
+  width: 100%;
+}
+
+#gameLightbox > div {
+  position: absolute;
+  bottom: 0px;
+}
+
+#gameLightbox > img {
+  position: relative;
   width: 100%;
 }
 

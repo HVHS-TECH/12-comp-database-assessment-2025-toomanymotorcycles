@@ -1,8 +1,8 @@
 /**************************************************************/
 // Import all external constants & functions required
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js";
 import { closeLightboxes } from "./ui.mjs";
-export { fb_authCheck, fb_authCheck_then, fb_login, fb_logout }
+export { fb_authCheck, fb_authCheck_then, fb_signUp, fb_login, fb_logout }
 /**************************************************************/
 
 /**************************************************************/
@@ -65,7 +65,7 @@ function fb_authCheck_then(nextFunc,manualCall) {
 // Written by Joshua Kessell-Haak, Term 1 2025
 // Logs the user into their account within the database via Google.
 /**************************************************************/
-function fb_login(google) {
+function fb_login(google, email, pass) {
   const AUTH = getAuth();
   if (google) {
     const PROVIDER = new GoogleAuthProvider();
@@ -83,8 +83,40 @@ function fb_login(google) {
       closeLightboxes();
       fb_authCheck(true);
   });
+  } else {
+    signInWithEmailAndPassword(AUTH, email, pass)
+  .then((userCredential) => {
+    // Signed in 
+    console.log("AUTHENTICATION SUCCESS - Logged in as user \"" + userCredential.user.email + "\"")
+    window.user = userCredential.user;
+    fb_authCheck(false);
+    window.location = "./games.html"
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
   }
 };
+
+function fb_signUp(email, pass) {
+  const AUTH = getAuth();
+  createUserWithEmailAndPassword(AUTH, email, pass)
+  .then((userCredential) => {
+    // Signed up
+    console.log("REGISTRATION SUCCESS - Logged in as user \"" + userCredential.user.email + "\"")
+    window.user = userCredential.user;
+    fb_authCheck(false);
+    window.location = "./games.html"
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
+}
 
 /**************************************************************/
 // function fb_logout()
@@ -108,6 +140,7 @@ function fb_logout() {
 window.fb_authCheck = fb_authCheck;
 window.fb_login = fb_login;
 window.fb_logout = fb_logout;
+window.fb_signUp = fb_signUp;
 
 /**************************************************************/
 // END OF CODE

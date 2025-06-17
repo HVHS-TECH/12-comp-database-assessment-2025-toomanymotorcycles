@@ -86,6 +86,7 @@ function fb_read_passOn(path,nextFunction) {
             nextFunction(fb_data);
         } else {
             console.warn("The data at \'" + ref + "\' was not found.");
+            nextFunction(fb_data);
         }
 
     }).catch((error) => {

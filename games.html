@@ -10,7 +10,8 @@
         <script type="module" src="./scripts/highscore.mjs"></script>
         <script type="module" src="./scripts/gamelist.mjs"></script>
         <script type="module">
-            import {fb_authCheck_then } from "./scripts/auth.mjs";
+            import { fb_authCheck_then } from "./scripts/auth.mjs";
+            import { fb_read_passOn } from "./scripts/readwrite.mjs"
             import { loadGames } from "./scripts/gamelist.mjs";
             fb_authCheck_then(() => {
                 if (window.user == undefined) {
@@ -20,10 +21,27 @@
                 document.getElementById("email").innerHTML = window.user.email;
                 document.getElementById("uid").innerHTML = "UID: "+window.user.uid;
                 document.getElementById("profilePic").setAttribute("src",window.user.photoURL);
+                try {fb_read_passOn(`/userData/${window.user.uid}/username`, (output) => {document.getElementById("username").innerHTML = output})} catch {}
                 document.getElementById("awaitingAuth").setAttribute("hidden","");
                 document.getElementById("authRequired").removeAttribute("hidden");
+                fb_read_passOn(`/userData/${window.user.uid}`,(result) => {
+                    if (result == undefined) {
+                        openLightbox("registerlightbox2")
+                    }
+                })
                 loadGames();
+                
             }, true);
+        </script>
+        <script type="module">
+            import {fb_write} from "./scripts/readwrite.mjs"
+            function submitAdditionalData(usr, age) {
+                console.log()
+                fb_write(`/userData/${window.user.uid}/username`,usr);
+                fb_write(`/userData/${window.user.uid}/age`,age);
+                window.location.reload();
+            }
+            window.submitAdditionalData = submitAdditionalData;
         </script>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
@@ -32,7 +50,7 @@
     <body>
         <div id="authRequired" hidden>
         <div class="sidebar" id="loginlightbox">
-            <h1 id="username" style="padding-left: 2rem; padding-top: 2rem;">{username}</h1>
+            <h1 id="username" style="padding-left: 2rem; padding-top: 2rem;">...</h1>
             <p id="email" style="line-height: 0px; padding-left: 2rem;">{email}</p>
             <p id="uid" style="color: gray; line-height: 5px; padding-left: 2rem;">UID: {uid}</p>
             <br>
@@ -78,6 +96,19 @@
                     <button id="playButton" onclick="">play</button>
                 </div>
             </div>
+            <div class="lightbox" id="registerlightbox2">
+            <h1>hello, new user!</h1>
+            <h3>please complete this form to complete your registration.</h3>
+            <br>
+            <form class="authform" id="registerform">
+                <p>username</p>
+                <input name="usernameField" id="usernameField" type="text" value="" required>
+                <p>age</p>
+                <input name="ageField" id="ageField" type="text" required>
+                <br><br><br>
+                <button class="formButton" id="completeRegistration" type="button" onclick="submitAdditionalData(document.getElementById('usernameField').value, document.getElementById('ageField').value)"><b>submit</b></button>
+            </form>
+        </div>
         </div>
         <div id="templateStorage" hidden>
             <button id="entryTemplate" class="gameEntry" onclick="openGameLightbox()">
@@ -91,6 +122,5 @@
         </div>
     </body>
     <script>
-        
     </script>
 </html>

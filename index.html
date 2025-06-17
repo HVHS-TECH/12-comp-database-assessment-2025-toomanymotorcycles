@@ -28,11 +28,11 @@
             <h1>login</h1>
             <form class="authform" id="loginform">
                 <p>email</p>
-                <input id="email1" type="text">
+                <input name="email1" id="email1" type="text" required>
                 <p>password</p>
-                <input id="pass1" type="password">
+                <input name="pass1" id="pass1" type="password" required>
                 <br><br>
-                <button class="formButton" id="loginEmail" type="submit"><b>login</b></button>
+                <button class="formButton" id="loginEmail" type="button" onclick="fb_login(false,document.getElementById('email1').value,document.getElementById('pass1').value)"><b>login</b></button>
                 <br><br>
                 <p class="linebreak"> or </p>
                 <button type="button" class="formButton" id="loginGoogle" onclick="closeLightboxes(); openLightbox('googlelightbox'); fb_login(true)"><img src="Google__G__logo.svg">&emsp;<b>login with google</b></button>
@@ -42,15 +42,11 @@
             <h1>register</h1>
             <form class="authform" id="registerform">
                 <p>email</p>
-                <input id="email2" type="text">
-                <p>username</p>
-                <input id="username" type="text">
+                <input name="email2" id="email2" type="text" required>
                 <p>password</p>
-                <input id="pass2" type="password">
-                <p>age</p>
-                <input id="age" type="text">
+                <input name="pass2" id="pass2" type="password" required>
                 <br><br>
-                <button class="formButton" id="registerEmail" type="submit"><b>register</b></button>
+                <button class="formButton" id="registerEmail" type="button" onclick="fb_signUp(document.getElementById('email2').value,document.getElementById('pass2').value)"><b>register</b></button>
                 <br><br>
                 <p class="linebreak"> or </p>
                 <button type="button" class="formButton" id="registerGoogle" onclick="closeLightboxes(); openLightbox('googlelightbox'); fb_login(true)"><img src="Google__G__logo.svg">&emsp;<b>register with google</b></button>
@@ -63,7 +59,4 @@
         </div>
         </div>
     </body>
-    <script>
-        
-    </script>
 </html>
