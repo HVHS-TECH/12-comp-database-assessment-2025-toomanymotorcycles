@@ -1,7 +1,8 @@
 
 //WARNING:
 // Don't touch this. Seriously, don't. If you touch this, you risk crashing my game hub. So please, DON'T TOUCH THIS CODE.
-// In order to activate this, please go to the end of the script, uncomment the last line of code and write your game's database ID into the brackets. I'll tell you your game's database ID once I've set your game's databse entry up.
+
+// In order to activate this script, please go to the end of the script, uncomment the last line of code and write your game's database ID into the brackets. I'll tell you your game's database ID once I've set your game's databse entry up.
 
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut} from "https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js";
 import { ref, get, set} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
