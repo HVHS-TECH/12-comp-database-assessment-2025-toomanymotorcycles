@@ -171,7 +171,15 @@ body {
   width: 100%;
 }
 
+#gameLightbox {
+  position: relative;
+}
+
 #gameLightbox > div {
+  z-index: 100;
+  width: 100%;
+  max-width: 600px;
+  background-color: inherit;
   position: absolute;
   bottom: 0px;
 }
@@ -251,4 +259,18 @@ body {
     flex: 1;
     border-bottom: 2px solid #ffffff;
     margin: auto;
+}
+
+.recordsTable {
+  color: white;
+  text-align: center;
+  max-width: 20%;
+  margin: auto;
+  background-color: #1f1f1f;
+  padding: 2rem;
+  margin: 2rem;
+  border-radius: 12px;
+  line-height: 250%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  float: left;
 }

@@ -14,7 +14,7 @@ console.log('%c fb_readwrite.mjs initialised',
 
 /**************************************************************/
 // Import all external constants & functions required
-import { ref, query, orderByChild, limitToFirst, limitToLast, get, set, update, onValue, remove} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+import { ref, query, orderByChild, limitToFirst, limitToLast, get, set, update, onValue, onChildAdded, remove} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 import { database } from "./init.mjs"
 /**************************************************************/
 // Import all the methods you want to call from the firebase modules
@@ -24,7 +24,7 @@ import { database } from "./init.mjs"
 // EXPORT FUNCTIONS
 // List all the functions called by code or html outside of this module
 /**************************************************************/
-export { fb_read, fb_read_passOn, fb_readpath, fb_write, fb_update, fb_sortedread, fb_listen, fb_delete, randomInteger};
+export { fb_read, fb_read_passOn, fb_readpath, fb_write, fb_update, fb_sortedread, fb_listen, fb_delete, fb_updateRecordTable, fb_sleeperfunction, randomInteger};
 
 
 function randomInteger(digits) {
@@ -242,6 +242,43 @@ function fb_sortedread(path, orderKey, limit, orderDescending) {
     });
 };
 
+function fb_updateRecordTable(path, orderKey, limit, orderDescending, tableToUpdate, nextFunction) {
+    console.log('%c fb_sortedread(): ',
+        'color: ' + COL_C + '; background-color: ' + COL_B + ';'
+    );
+    if (window.user != null) {
+        console.log("Attempting to read value as user \"" + user.displayName +"\"") ;   
+    } else {
+        console.log("Attempting to read value as anonymous user");
+    }
+
+    var reference;
+    if (orderDescending) { reference = query(ref(database, path), orderByChild(orderKey), limitToLast(limit));} 
+    else {reference = query(ref(database, path), orderByChild(orderKey), limitToFirst(limit));}
+
+    get(reference).then((allSnapshots) => {
+        if (allSnapshots != null) {
+            var fb_data = []
+        allSnapshots.forEach(function (snapshot) {
+            fb_data.push(snapshot.val());
+        })
+        if (orderDescending) {fb_data.reverse();}
+        console.log(fb_data)
+        nextFunction(fb_data,tableToUpdate);
+        } else {
+                console.warn("The data at \'" + ref + "\' was not found.");
+                nextFunction("error",tableToUpdate);
+        }
+    }).catch((error) => {
+        console.warn(error.code + " - " + error.message);
+        if (error.message = "Permission denied.") {
+            console.warn("PERMISSION DENIED - you do not have permission to read the database at the queried location.")
+        } else {
+            console.warn(error.code + " - " + error.message);
+        }
+    });
+};
+
 /**************************************************************/
 // // function fb_listen(path)
 // Written by Joshua Kessell-Haak, Term 1 2025
@@ -263,7 +300,6 @@ function fb_listen(path) {
         var fb_data = snapshot.val();
         if (fb_data != null) {
             console.log(fb_data);
-            //document.getElementById("p_fbListen").innerHTML = fb_data;
             return fb_data;
         } else {
             console.warn("The data at \'" + ref + "\' was not found.");
@@ -272,6 +308,29 @@ function fb_listen(path) {
     });
 };
 
+function fb_sleeperfunction(path, triggerFunction) {
+    console.log('%c fb_sleeperfunction(): ',
+        'color: ' + COL_C + '; background-color: ' + COL_B + ';'
+    );
+    if (window.user != null) {
+        console.log("Attempting to set up listener on value as user \"" + user.displayName +"\"") ;   
+    } else {
+        console.log("Attempting to set up listener on value as anonymous user");
+    }
+    const reference = ref(database, path);
+    onValue(reference, (snapshot) => {
+        console.log("LISTENER ACTIVATED")
+        console.log(`[data-id-link="${snapshot._node.children_.root_.key}"]`)
+        console.log(document.querySelectorAll(`[data-id-link="${snapshot._node.children_.root_.key}"]`))
+        console.log(snapshot.val())
+        if (document.querySelectorAll(`[data-id-link="${snapshot._node.children_.root_.key}"]`).length>0) {
+            triggerFunction(document.querySelectorAll(`[data-id-link="${snapshot._node.children_.root_.key}"]`)[0],snapshot.val())
+        } else {
+            console.warn("Table doesn't exist - page must not be fully loaded.")
+        }
+        
+    });
+};
 /**************************************************************/
 // function fb_delete(path)
 // Written by Joshua Kessell-Haak, Term 1 2025
