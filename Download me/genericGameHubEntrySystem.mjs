@@ -145,7 +145,7 @@ class gghEntryHandler {
                     }
                 });
             } else {
-                console.warn("LINE 1 - GENERIC GAME HUB ENTRY HANDLER - WARNING: とまって！ You are not allowed to alter another game's records!");
+                console.warn("LINE 1 - GENERIC GAME HUB ENTRY HANDLER - WARNING: この狂気を止めろ！ You are not allowed to alter another game's records!");
                 console.warn("LINE 2 - Either the authentication system failed or you attempted to alter another game's records. Either way, your attempted changes have not been saved. If the former reason is the problem, pretend that the third line of this warning was never written.");
                 console.warn("LINE 3 - あなたは邪悪な悪魔です!")
             }
