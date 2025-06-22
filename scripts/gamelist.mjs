@@ -48,15 +48,19 @@ async function updateSingleRecord(updatedTable, newValue) {
     console.log(updatedTable)
     console.log(Object.values(Object.values(newValue)[0]));
     updatedTable.childNodes[5].childNodes[1].innerHTML = "";
-                fb_updateRecordTable(`/records/${updatedTable.dataset.idLink}`,"score",10,true,updatedTable,(rawRecords, table) => {
+                fb_updateRecordTable(`/records/${updatedTable.dataset.idLink}`,"value",10,true,updatedTable,(rawRecords, table) => {
                 try{
                     var records = Object.values(rawRecords);
+                    console.log(records);
+                    var sortedRecords = records.sort((a,b) => {
+                        return b.score - a.score;
+                    })
                     var v = 0;
-                    console.log("AAAAA: "+records.length)
-                    for (v=0; v<records.length; v++) {
-                        console.log(records[v]);
+                    console.log("AAAAA: "+sortedRecords.length);
+                    for (v=0; v<sortedRecords.length; v++) {
+                        console.log(sortedRecords[v]);
                         var newScore = document.createElement("li");
-                        newScore.innerHTML = `${records[v].score} (${records[v].user})`
+                        newScore.innerHTML = `${sortedRecords[v].score} (${sortedRecords[v].user})`
                         console.log(updatedTable.dataset.idLink+":"+newScore.innerHTML);
                         returnedValue.push(newScore)
                         console.log(returnedValue)
@@ -80,15 +84,19 @@ function updateRecords() {
         if (!tables[i].id) {
             tables[i].childNodes[5].childNodes[1].innerHTML = "";
             console.log("idLink: " + tables[i].dataset.idLink);
-            fb_updateRecordTable(`/records/${tables[i].dataset.idLink}`,"score",10,true,tables[i],(rawRecords, table) => {
+            fb_updateRecordTable(`/records/${tables[i].dataset.idLink}`,"value",10,true,tables[i],(rawRecords, table) => {
                 try{
                     var records = Object.values(rawRecords);
+                    var sortedRecords = records.sort((a,b) => {
+                        console.log(a + ":" + b)
+                        return b.score - a.score;
+                    })
                     var v = 0;
-                    console.log("AAAAA: "+records.length)
-                    for (v=0; v<records.length; v++) {
-                        console.log(records[v]);
+                    console.log("AAAAA: "+sortedRecords.length)
+                    for (v=0; v<sortedRecords.length; v++) {
+                        console.log(sortedRecords[v]);
                         var newScore = document.createElement("li");
-                        newScore.innerHTML = `${records[v].score} (${records[v].user})`
+                        newScore.innerHTML = `${sortedRecords[v].score} (${sortedRecords[v].user})`
                         console.log(table.dataset.idLink+":"+newScore.innerHTML);
                         console.log(tables[i])
                         returnedValue.push(newScore)
