@@ -48,7 +48,7 @@ async function updateSingleRecord(updatedTable, newValue) {
     console.log(updatedTable)
     console.log(Object.values(Object.values(newValue)[0]));
     updatedTable.childNodes[5].childNodes[1].innerHTML = "";
-                fb_updateRecordTable(`/records/${updatedTable.dataset.idLink}`,"value",10,true,updatedTable,(rawRecords, table) => {
+                fb_updateRecordTable(`/records/${updatedTable.dataset.idLink}`,"score",10,true,updatedTable,(rawRecords, table) => {
                 try{
                     var records = Object.values(rawRecords);
                     var v = 0;
@@ -80,7 +80,7 @@ function updateRecords() {
         if (!tables[i].id) {
             tables[i].childNodes[5].childNodes[1].innerHTML = "";
             console.log("idLink: " + tables[i].dataset.idLink);
-            fb_updateRecordTable(`/records/${tables[i].dataset.idLink}`,"value",10,true,tables[i],(rawRecords, table) => {
+            fb_updateRecordTable(`/records/${tables[i].dataset.idLink}`,"score",10,true,tables[i],(rawRecords, table) => {
                 try{
                     var records = Object.values(rawRecords);
                     var v = 0;
