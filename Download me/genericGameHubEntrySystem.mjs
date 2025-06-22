@@ -167,5 +167,4 @@ class gghEntryHandler {
 }
 
 //Uncomment the line below.
-window.gghEntryHandler = new gghEntryHandler("blacksite");
-window.gghEntryHandler.login(true);
+//window.gghEntryHandler = new gghEntryHandler(databaseID);
