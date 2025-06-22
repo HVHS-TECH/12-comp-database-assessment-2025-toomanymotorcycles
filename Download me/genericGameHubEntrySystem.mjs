@@ -9,7 +9,7 @@ import { ref, get, set} from "https://www.gstatic.com/firebasejs/11.6.1/firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-database.js";
 
-const firebaseConfig = {
+const dataconf = {
     apiKey: "AIzaSyCeZXZgoV9Mpij9e9dstha_5NpFfOh7-TQ",
     authDomain: "comp-2025-joshua-k-h-project.firebaseapp.com",
     databaseURL: "https://comp-2025-joshua-k-h-project-default-rtdb.asia-southeast1.firebasedatabase.app",
@@ -20,7 +20,7 @@ const firebaseConfig = {
     measurementId: "G-7BEB4GJQV0"
 };
 
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(dataconf);
 const database = getDatabase(app);
 
 function randomInteger(digits) {
@@ -157,4 +157,4 @@ class gghEntryHandler {
 }
 
 //Uncomment the line below.
-//window.gghEntryHandler = new gghEntryHandler();
+//window.gghEntryHandler = new gghEntryHandler(write your database ID here);
