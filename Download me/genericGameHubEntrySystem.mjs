@@ -4,6 +4,8 @@
 
 // In order to activate this script, please go to the end of the script, uncomment the last line of code and write your game's database ID into the brackets. I'll tell you your game's database ID once I've set your game's databse entry up.
 
+console.log("GENERIC GAME HUB ENTRY HANDLER (v1)");
+
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut} from "https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js";
 import { ref, get, set} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
@@ -32,6 +34,7 @@ class gghEntryHandler {
         this.user = null;
         this.username = null;
         this.gameID = gameID;
+        console.log("GENERIC GAME HUB ENTRY HANDLER INITIALISED: gameID = "+this.gameID);
     }
 
     logout() {
@@ -114,26 +117,32 @@ class gghEntryHandler {
         }
     }
 
-    authenticateRecord(recordToAuthenticate) {
+    async authenticateRecord(recordToAuthenticate, nextFunction) {
         var verdict = false;
         const reference = ref(database, `/games/${this.gameID}/recordEntries`)
         get(reference).then((snapshot) => {
             var associatedEntries = Object.values(snapshot.val());
+            console.log(associatedEntries);
             var i = 0;
             for (i=0;i<associatedEntries.length;i++) {
                 if (associatedEntries[i].id == recordToAuthenticate) {
+                    console.log("Verification system has allowed proposed edit.")
                     verdict = true;
-                } 
+                }
+                nextFunction(verdict);
             }
         }).catch((error) => {
+            console.warn("GENERIC GAME HUB ENTRY HANDLER - VERIFICATION ALERT: " + error.code + " - " + error.message);
             verdict = false;
+            nextFunction(verdict);
         })
-        return verdict;
     }
 
     recordEntry(recordToAlter, scoreToEnter) {
-        if (window.user != null) {
-            if (this.authenticateRecord(recordToAlter)) {
+        if (this.user != null) {
+            this.authenticateRecord(recordToAlter, (authVerdict) => {
+                console.log(authVerdict);
+            if (authVerdict) {
                     const reference = ref(database, `/records/${recordToAlter}/entry${randomInteger(20)}`);
                     set(reference, {user:this.username, score:scoreToEnter}).then(() => {
                     console.log("GENERIC GAME HUB ENTRY HANDLER: Entry saved.")
@@ -149,7 +158,8 @@ class gghEntryHandler {
                 console.warn("LINE 2 - Either the authentication system failed or you attempted to alter another game's records. Either way, your attempted changes have not been saved. If the former reason is the problem, pretend that the third line of this warning was never written.");
                 console.warn("LINE 3 - あなたは邪悪な悪魔です!")
             }
-            
+            });
+              
         } else {
             console.warn("GENERIC GAME HUB ENTRY HANDLER - ALERT: You are not signed into the Generic Game Hub! Your score has not been recorded.");
         }
@@ -157,4 +167,5 @@ class gghEntryHandler {
 }
 
 //Uncomment the line below.
-//window.gghEntryHandler = new gghEntryHandler(write your database ID here);
+window.gghEntryHandler = new gghEntryHandler("blacksite");
+window.gghEntryHandler.login(true);
