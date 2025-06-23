@@ -14,7 +14,7 @@ function loadGames() {
         var newEntry = document.getElementById("entryTemplate").cloneNode(true);
         newEntry.removeAttribute("id");
         document.getElementById("gameList").appendChild(newEntry);
-        console.log(gameList)
+        console.log("URL: "+gameList[i].url)
         newEntry.firstChild.nextSibling.childNodes[4].childNodes[1].innerHTML = gameList[i].title;
         newEntry.setAttribute("onclick", `openGameLightbox("${gameList[i].title}","${gameList[i].description}","${gameList[i].url}","${gameList[i].imgURL}")`);
     }
