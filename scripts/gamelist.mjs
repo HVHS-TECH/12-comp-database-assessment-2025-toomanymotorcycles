@@ -16,6 +16,7 @@ function loadGames() {
         document.getElementById("gameList").appendChild(newEntry);
         console.log("URL: "+gameList[i].url)
         newEntry.firstChild.nextSibling.childNodes[4].childNodes[1].innerHTML = gameList[i].title;
+        newEntry.firstChild.nextSibling.childNodes[1].setAttribute("src",gameList[i].imgURL);
         newEntry.setAttribute("onclick", `openGameLightbox("${gameList[i].title}","${gameList[i].description}","${gameList[i].url}","${gameList[i].imgURL}")`);
     }
    });

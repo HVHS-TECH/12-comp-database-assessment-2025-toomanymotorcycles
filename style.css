@@ -1,6 +1,7 @@
-body {
+html, body {
     font-family: "Raleway", Arial, Helvetica, sans-serif;
     background-color: #2c2c2c;
+    height: 100%;
 }
 
 #titleBox {
@@ -29,7 +30,7 @@ body {
 }
 
 .sidebar {
-  display: flexbox;
+  display: block;
   float: left;
   align-content: center;
   color: white;
@@ -152,21 +153,17 @@ body {
 
 .gameEntry > div {
   padding: 0%;
-  position: relative;
   background-color: inherit;
 }
 
 .gameEntry > div > div {
   z-index: 100;
   background-color: inherit;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  position: absolute;
   bottom: 0px;
   width: 100%
 }
 
 .gameEntry > div > img {
-  position: relative;
   height: 100%;
   width: 100%;
 }

@@ -8,7 +8,7 @@ function openLightbox(id) {
 function openGameLightbox(title, desc, playURL, imgURL) {
             document.getElementById("authLightboxes").style.display = "block";
             document.getElementById("gameLightbox").style.display = "block";
-            document.getElementById("gameLightbox").childNodes[1].setAttribute("src",imgURL)
+            document.getElementById("gameLightbox").childNodes[3].setAttribute("src",imgURL)
             document.getElementById("gameTitle").innerHTML = title;
             document.getElementById("gameDesc").innerHTML = desc;
             document.getElementById("playButton").setAttribute("onclick",`window.location=\'${playURL}\'`)
